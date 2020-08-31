@@ -5,14 +5,14 @@ using namespace std;
 
 int SumaIterativa(int num){
     
-    int contador=0; 
-    for(int i = 0; i <= num; i++){
-        contador+=i; 
+    int contador=0;                     // 1
+    for(int i = 0; i <= num; i++){      // n+1
+        contador+=i;                    //2n
     }
-    return contador; 
+    return contador;                    //1      O(n)
 }
 
-int SumaRecursiva(int n){
+int SumaRecursiva(int n){               //O(n)
     if(n == 0){
         return 0; 
     }
@@ -22,7 +22,7 @@ int SumaRecursiva(int n){
    
 }
 
-int SumaMatematica(int a, int m, int n){
+int SumaMatematica(int a, int m, int n){        //O(6) -> O(1)
     int S = (pow(a, m)-pow(a, n+1))/(1-a); 
     return S; 
    
