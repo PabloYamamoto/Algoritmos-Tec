@@ -2,14 +2,19 @@
 
 
 int main(){
-    vector<int> Vec; 
-    for (size_t i = 0; i < 10; i++)
-    {
-        Vec.push_back((int)rand()% 300); 
-    }
+    
+    
 
     Busqueda<int> Ejemplo; 
-    Ejemplo.DesplegarVector(Vec); 
+    cout << endl; 
+    Ejemplo.DesplegarVector(); 
+    cout << endl; 
+
+    Ejemplo.OrdenarArreglo(); 
+    Ejemplo.DesplegarVector();
+    cout << endl; 
+    cout << Ejemplo.BusquedaBinaria(130) << endl; 
+    
     
 
     return 0; 
