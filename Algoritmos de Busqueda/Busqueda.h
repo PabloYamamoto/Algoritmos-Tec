@@ -11,16 +11,16 @@ class Busqueda{
         vector<T> Elementos; 
     public: 
         Busqueda(){
-            for (size_t i = 0; i < 10; i++)
+            for (size_t i = 0; i < 100000; i++)
             {
-                Elementos.push_back((int)rand()% 300); 
+                Elementos.push_back((int)rand()% 100000); 
             }
         }; 
 
         ~Busqueda(){}; 
 
         void DesplegarVector(){
-            for(int i = 0; i < Elementos.size(); i++){
+            for(int i = 0; i < Elementos.size()-1; i++){
                 cout << Elementos.at(i) << "\t"; 
             }
             cout << endl; 
@@ -31,7 +31,7 @@ class Busqueda{
         }; 
 
         T BusquedaSecuencial(T val){
-            for(int i = 0; i < Elementos.size(); i++){
+            for(int i = 0; i < Elementos.size()-1; i++){
                 if(Elementos.at(i) == val){
                 return i; 
                 }
@@ -42,7 +42,7 @@ class Busqueda{
 
         T BusquedaSecuencialOredenada(T val){
             OrdenarArreglo(); 
-            for(int i = 0; i<Elementos.size(); i++){
+            for(int i = 0; i<Elementos.size()-1; i++){
                 if(Elementos.at(i) > val){
                     return -1; 
                     break; 
@@ -51,14 +51,16 @@ class Busqueda{
                     return i; 
                 }
             }
+            return -1; 
         }; 
 
 
         T BusquedaSecuencialOredenada2(T val){
             OrdenarArreglo(); 
-            for(int i = 0; i < Elementos.size(); i+=2){
-                if(val > Elementos.at(i)){
+            for(int i = 0; i < Elementos.size()-1; i+=2){
+                if(val < Elementos.at(i)){
                     i--; 
+                    if(val < Elementos.at(i)) return -1;  
                 }
                 if(val == Elementos.at(i)){
                     return i; 

@@ -1,21 +1,50 @@
 #include "Busqueda.h"
-
+#include "../mytimer.h"
 
 int main(){
     
     
 
     Busqueda<int> Ejemplo; 
-    cout << endl; 
-    Ejemplo.DesplegarVector(); 
-    cout << endl; 
+    
+    DECLARE_TIMING(t1);
+    START_TIMING(t1);
+    int answer1 = Ejemplo.BusquedaSecuencial(94244); 
+    STOP_TIMING(t1);
+    cout << "==================================================================================================================" << endl; 
+    SHOW_TIMING(t1, "Busqueda Secuencial ");
+    cout << "El número 94244 se encontró en la posición: " << answer1 << endl;
+    cout << "==================================================================================================================" << endl; 
+
+    DECLARE_TIMING(t2);
+    START_TIMING(t2);
+    int answer2 = Ejemplo.BusquedaSecuencialOredenada(94244); 
+    STOP_TIMING(t2);
+    cout << "==================================================================================================================" << endl; 
+    SHOW_TIMING(t2, "Busqueda Secuencial Ordenada ");
+    cout << "El número 94244 se encontró en la posición: " << answer2 << endl;
+    cout << "==================================================================================================================" << endl; 
+
+
+    DECLARE_TIMING(t3);
+    START_TIMING(t3);
+    int answer3 = Ejemplo.BusquedaSecuencialOredenada2(94244); 
+    STOP_TIMING(t3);
+    cout << "==================================================================================================================" << endl; 
+    SHOW_TIMING(t3, "Busqueda Secuencial Ordenada 2 ");
+    cout << "El número 94244 se encontró en la posición: " << answer3 << endl;
+    cout << "==================================================================================================================" << endl; 
 
     Ejemplo.OrdenarArreglo(); 
-    Ejemplo.DesplegarVector();
-    cout << endl; 
-    cout << Ejemplo.BusquedaBinaria(130) << endl; 
     
-    
+    DECLARE_TIMING(t4);
+    START_TIMING(t4);
+    int answer4 =  Ejemplo.BusquedaBinaria(94244); 
+    STOP_TIMING(t4);
+    cout << "==================================================================================================================" << endl; 
+    SHOW_TIMING(t4, "Busqueda Binaria ");
+    cout << "El número 94244 se encontró en la posición: " << answer4 << endl;
+    cout << "==================================================================================================================" << endl; 
 
     return 0; 
 }
