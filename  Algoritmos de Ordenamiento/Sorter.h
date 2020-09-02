@@ -48,12 +48,12 @@ class BubbleSort : public Sorter<T>{
 
         void Sort(vector<T> &arr){
             
-            for (size_t i = 0; i < arr.size(); i++)
+            for (size_t i = 0; i < arr.size()-1; i++)
             {
                 bool no_swap = true; 
-                for (size_t j = i; j < arr.size()-1; j++)
+                for (size_t j = 0; j < arr.size()-1; j++)
                 {
-                    if(arr[j] < arr[j+1]){
+                    if(arr[j] > arr[j+1]){
                         Sorter<T>::swap(j, j+1, arr); 
                         no_swap = false; 
                     }
