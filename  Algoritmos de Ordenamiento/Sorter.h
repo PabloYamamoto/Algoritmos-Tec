@@ -47,13 +47,16 @@ class BubbleSort : public Sorter<T>{
         ~BubbleSort(){}; 
 
         void Sort(vector<T> &arr){
-            bool no_swap = true; 
-            for (size_t i = 0; i < arr.size()-1; i++)
+            
+            for (size_t i = 0; i < arr.size(); i++)
             {
-                for (size_t j = i; j < arr.size(); j++)
+                bool no_swap = true; 
+                for (size_t j = i; j < arr.size()-1; j++)
                 {
-                    Sorter<T>::swap(j, j+1, arr); 
-                    no_swap = false; 
+                    if(arr[j] < arr[j+1]){
+                        Sorter<T>::swap(j, j+1, arr); 
+                        no_swap = false; 
+                    }
                 }
                 if(no_swap == true){
                     break; 
