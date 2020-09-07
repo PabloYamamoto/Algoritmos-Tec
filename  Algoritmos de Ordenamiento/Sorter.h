@@ -92,14 +92,13 @@ class InsertionSort : public Sorter<T>{
 }; 
 
 template <typename T>
-
-class MergeSort : Sorter<T>
+class MergeSort : public Sorter<T>
 {
 public:
     MergeSort(){};
     ~MergeSort(){};
 
-    void sort(vector<T> &arr) { mergeSort(arr, 0, arr.size() - 1); };
+    void Sort(vector<T> &arr) { mergeSort(arr, 0, arr.size() - 1); };
 
     void mergeSort(vector<T> &arr, int begin, int end)
     {
