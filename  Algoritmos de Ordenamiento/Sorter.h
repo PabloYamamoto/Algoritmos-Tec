@@ -68,3 +68,70 @@ class BubbleSort : public Sorter<T>{
 
 
 }; 
+
+
+template<typename T>
+class InsertionSort : public Sorter<T>{
+    public: 
+        InsertionSort(){}; 
+        ~InsertionSort(){}; 
+    
+        void Sort(vector<T> &arr){
+            T key; 
+            for(int i = 1; i < arr.size(); i++){
+                key = arr[i]; 
+                int j = i -1; 
+                while(j >= 0 and arr[j] > key){
+                    arr[j+1] = arr[j]; 
+                    j--; 
+                }
+                arr[j+1] = key; 
+            }
+        }; 
+
+}; 
+
+template <typename T>
+
+class MergeSort : Sorter<T>
+{
+public:
+    MergeSort(){};
+    ~MergeSort(){};
+
+    void sort(vector<T> &arr) { mergeSort(arr, 0, arr.size() - 1); };
+
+    void mergeSort(vector<T> &arr, int begin, int end)
+    {
+        if (begin < end)
+        {
+            int mid = begin + (end - begin) / 2;
+
+            mergeSort(arr, begin, mid);
+            mergeSort(arr, mid + 1, end);
+
+            merge(arr, begin, mid, end);
+        }
+    };
+
+    void merge(vector<T> &arr, int begin, int mid, int end)
+    {
+        int i = begin;
+        int j = mid + 1;
+        vector<T> aux(arr);
+
+        for (int k = begin; k <= end; k++)
+        {
+            if ((aux[i] < aux[j] || j > end) && i<=mid)
+            {
+                arr[k] = aux[i];
+                i++;
+            }
+            else if (aux[i] >= aux[j] || i > mid)
+            {
+                arr[k] = aux[j];
+                j++;
+            }
+        }
+    };
+};
