@@ -115,18 +115,18 @@ public:
 
     void merge(vector<T> &arr, int begin, int mid, int end)
     {
-        int i = begin;
-        int j = mid + 1;
-        vector<T> aux(arr);
+        int i = 0;
+        int j = mid - begin +1;
+        vector<T> aux(arr.begin()+ begin, arr.begin()+end+1);
 
         for (int k = begin; k <= end; k++)
         {
-            if ((aux[i] < aux[j] || j > end) && i<=mid)
+            if ((aux[i] < aux[j] || j > end-begin) && i<=mid-begin)
             {
                 arr[k] = aux[i];
                 i++;
             }
-            else if (aux[i] >= aux[j] || i > mid)
+            else if (aux[i] >= aux[j] || i > mid-begin)
             {
                 arr[k] = aux[j];
                 j++;
@@ -134,3 +134,42 @@ public:
         }
     };
 };
+
+
+template <typename T>
+class QuickSort : public Sorter<T>{
+    public: 
+        QuickSort(){}; 
+        ~QuickSort(){}; 
+
+        void Sort(vector<T> &arr){
+            quicksort(arr, 0, arr.size()-1); 
+        }; 
+
+        void quicksort(vector<T> &arr, int low, int high){
+
+            if(low < high){
+                int piv = partition(arr, low, high);
+                quicksort(arr, low, piv-1); 
+                quicksort(arr, piv+1, high);  
+            }
+
+        }; 
+
+        int partition(vector<T> &arr, int low, int high){
+            T pivot = arr[high]; 
+            int i = low-1; 
+            int j; 
+            for (j = low; j < high; j++)
+            {
+                if(arr[j] < pivot){
+                    i++; 
+                    Sorter<T>::swap(i, j, arr); 
+                }
+                
+            }
+            Sorter<T>::swap(i+1, high, arr); 
+            return (i+1); 
+            
+        }; 
+}; 
