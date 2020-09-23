@@ -27,4 +27,27 @@ class Busqueda{
            return -1; 
         };
 
+        T BusquedaSecuencial_P2(vector<T> Vec, T val){
+            int index_start = -1, index_final = -1;  // They start at -1 in case we dont find the values we are searching for
+            for(size_t i = 0; i < Vec.size(); i++){
+                if(Vec.at(i) == val){
+                    index_start = i; 
+                    break; 
+                }
+            }
+
+            for (size_t i = index_start; i < Vec.size(); i++)
+            {
+                if(Vec.at(i) > val){
+                    index_final = i-1; 
+                    break; 
+                }
+            }
+            
+            return index_start, index_final; 
+            
+            
+        }; 
+
+
 }; 
