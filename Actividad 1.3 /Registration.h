@@ -3,7 +3,7 @@
 using namespace std; 
 
 #pragma once
-class Registratrion{
+class Registration{
     private:
         string date;
         string time;
@@ -14,12 +14,9 @@ class Registratrion{
         string source_port;
         string destination_port;
 
-    
-
     public: 
-        
-        Registratrion(string date, string time, string source_ip, string source_port, string source_hostname, string destination_ip, string destination_port, string destination_hostname) : date{date}, time{time}, source_ip{source_ip}, source_port{source_port}, source_hostname{source_hostname}, destination_ip{destination_ip}, destination_port{destination_port}, destination_hostname{destination_hostname} {}; 
-        ~Registratrion(){}; 
+        Registration(string date, string time, string source_ip, string source_port, string source_hostname, string destination_ip, string destination_port, string destination_hostname) : date{date}, time{time}, source_ip{source_ip}, source_port{source_port}, source_hostname{source_hostname}, destination_ip{destination_ip}, destination_port{destination_port}, destination_hostname{destination_hostname} {}; 
+        ~Registration(){}; 
 
         void print(){
             cout << date << ", " <<  time << ", " <<  source_ip << ", "  << source_port << ", " << source_hostname << ", " << destination_ip << ", " << destination_port << ", " <<  destination_hostname << endl; 
@@ -33,11 +30,6 @@ class Registratrion{
         string getDestination_Hostname(){return destination_hostname; }; 
         string getSource_Port(){return source_port; }; 
         string getDestination_Port(){return destination_port; }; 
-    
-      
-
-
-
 }; 
 
 

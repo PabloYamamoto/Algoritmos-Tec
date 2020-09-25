@@ -1,72 +1,79 @@
 #include "Registration.h"
 #include "Busqueda.h"
-//#include "Sorter.h"
+#include "DataBase.h"
+#include "Sorter.h"
 #include <fstream>
-
 
 using namespace std; 
 
 template<typename T>
-bool compare_equalto(T &a, T &b){
-    return a.date() == b.date(); 
+bool compare_equalto(T &a,string &b){
+    return a.getDate() == b; 
 }
 
 template<typename T>
-bool compare_morethan(T &a, T &b){
-    return a > b; 
+bool compare_equalto2(T &a, string &b){
+    return a.getSource_Hostname() == b; 
+}
+
+template<typename T>
+bool compare_morethan(T &a, string &b){
+    return a.getSource_Hostname() > b; 
 }
 
 template<typename T>
 bool compare_lessthan(T &a, T &b){
-    return a < b; 
+    return a.getSource_Hostname() < b.getSource_Hostname(); 
 }
 
-
-
 int main(){
-    ifstream MyFile; 
-    MyFile.open("equipo7.csv"); 
+    string file_name = "equipo7.csv";
 
-    vector<Registratrion> All_Registrations = {}; 
-    string date, time, source_ip, source_port, source_hostname, destination_ip, destination_port, destination_hostname;
-
-    // Counter for printing the Registrations if enabeled
-    // int i = 0; 
-    while(!MyFile.eof()){
-        getline(MyFile, date, ','); 
-        getline(MyFile, time, ','); 
-        getline(MyFile, source_ip, ','); 
-        getline(MyFile, source_port, ','); 
-        getline(MyFile, source_hostname, ','); 
-        getline(MyFile, destination_ip, ','); 
-        getline(MyFile, destination_port, ','); 
-        getline(MyFile, destination_hostname, '\n'); 
-        
-        All_Registrations.push_back(Registratrion(date, time, source_ip, source_port, source_hostname, destination_ip, destination_port, destination_hostname)); 
-
-        // The code below prints all the registrations
-
-        // cout << "Resgistration number " << i << " == ";   
-        // All_Registrations.at(i).print(); 
-        // i++; 
-
-    }
-
-    cout << "==========================================================================" << endl; 
+    DataBase <Registration>DB(file_name, ',');
+    cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-· \n";    
     cout << "Pregunta 1" << endl; 
-    cout << "Número de registros: " << All_Registrations.size()-1 << endl; 
-    cout << "==========================================================================" << endl;
+    cout << "Número de registros: " << DB.All_Registrations.size()-1 << endl; 
+    cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-· \n";
 
-    cout << "==========================================================================" << endl; 
+    cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-· \n";    
     cout << "Pregunta 2" << endl; 
-    Busqueda<Registratrion> BS; 
+    string second_day = DB.next_day(DB.All_Registrations[0].getDate());
+    cout << "Fecha de busqueda: " << second_day << endl;
+    Busqueda<Registration> BS; 
+    int start, final;
+    BS.BusquedaSecuencial_P2(DB.All_Registrations, second_day, &compare_equalto, &start, &final); 
+    cout << "Numero de registros: " << (final - start) << endl;
+    cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-· \n";
 
-    BS.BusquedaSecuencial_P2(All_Registrations, ); 
-    cout << "==========================================================================" << endl;
-
+    cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-· \n";
+    cout << "Pregunta 3" << endl; 
+    Quicksort<Registration> QS;
+    QS.sort(DB.All_Registrations, &compare_lessthan);
+    vector <string> hostnames = {"jeffrey.reto.com", "betty.reto.com", "katherine.reto.com", "scott.reto.com", "benjamin.reto.com", "samuel.reto.com", "raymond.reto.com"};
+    for (auto name : hostnames){
+        cout << name;
+        int found = BS.BusquedaBinaria(DB.All_Registrations, 0, DB.All_Registrations.size()-1, name,  &compare_equalto2, &compare_morethan);
+        cout << (found > -1 ? " encontrado. \n" : " no ecnontrado. \n");
+    }
     
-   
-  
-    MyFile.close(); 
+    cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-· \n";
+
+    cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-· \n";   
+    cout << "Pregunta 4" << endl; 
+    cout << "dirección de la red interna de la compañía: " << DB.company_ip() << endl; 
+    cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-· \n";
+
+    cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-· \n";   
+    cout << "Pregunta 5" << endl; 
+    cout << "server.reto.com: ";
+    int found = BS.BusquedaBinaria(DB.All_Registrations, 0, DB.All_Registrations.size()-1, "server.reto.com",  &compare_equalto2, &compare_morethan);
+    cout << (found > -1 ? " encontrado. \n" : " no ecnontrado. \n");
+    cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-· \n";
+
+    cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-· \n";   
+    cout << "Pregunta 6" << endl; 
+    DB.findMail();
+    cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-· \n";
+
 }
 

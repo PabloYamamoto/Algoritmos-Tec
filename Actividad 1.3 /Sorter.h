@@ -16,7 +16,7 @@ class Sorter{
             arr.at(j) = temp;  
         }; 
 
-        virtual void Sort(vector<T> &arr){};
+        virtual void sort(vector<T> &arr, bool(*compare)(T &a, T &b)){};
 
         void show(vector<T> &vec){
             cout << "==================================================================" << endl;
@@ -33,47 +33,42 @@ class Sorter{
 }; 
 
 template <typename T>
-class MergeSort : public Sorter<T>
+class Quicksort : public Sorter<T>
 {
-public:
-    MergeSort(){};
-    ~MergeSort(){};
+    public:
+    Quicksort() {};
+    ~Quicksort() {};
 
-    void Sort(vector<T> &arr, bool(*compare)(T &a, T &b)) { 
-        mergeSort(arr, 0, arr.size() - 1, bool(*compare)(T &a, T &b)
+    void sort(std::vector<T> &arr, bool (*compare)(T &a, T &b))
+    {
+        quicksort(arr, 0, arr.size() - 1, compare);
     };
 
-    void mergeSort(vector<T> &arr, int begin, int end, bool(*compare)(T &a, T &b))
+    void quicksort(std::vector<T> &arr, int low, int high, bool (*compare)(T &a, T &b))
     {
-        if (begin < end)
+        if (low < high) 
         {
-            int mid = begin + (end - begin) / 2;
+            int piv = partition(arr, low, high, compare);
 
-            mergeSort(arr, begin, mid, bool(*compare)(T &a, T &b)); 
-            mergeSort(arr, mid + 1, end, bool(*compare)(T &a, T &b)); 
-
-            merge(arr, begin, mid, end, bool(*compare)(T &a, T &b)); 
+            quicksort(arr, low, piv - 1, compare);
+            quicksort(arr, piv + 1, high, compare);
         }
     };
 
-    void merge(vector<T> &arr, int begin, int mid, int end, bool(*compare)(T &a, T &b))
+    int partition(std::vector<T> &arr, int low, int high, bool (*compare)(T &a, T &b))
     {
-        int i = 0;
-        int j = mid - begin +1;
-        vector<T> aux(arr.begin()+ begin, arr.begin()+end+1);
+        T pivot = arr[high];
+        int i = low - 1;
 
-        for (int k = begin; k <= end; k++)
+        for (int j = low; j <= high-1; j++)
         {
-            if (((*compare)(aux[i], aux[j])|| j > end-begin) && i<=mid-begin)
+            if ((*compare)(arr[j], pivot))
             {
-                arr[k] = aux[i];
                 i++;
-            }
-            else if (aux[i] >= aux[j] || i > mid-begin)
-            {
-                arr[k] = aux[j];
-                j++;
+                Sorter<T>::swap(i, j, arr);
             }
         }
+        Sorter<T>::swap(i+1, high, arr);
+        return (i+1);
     };
 };
