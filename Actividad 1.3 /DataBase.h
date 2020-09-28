@@ -61,13 +61,11 @@ public:
             i++;
         }
         size_t last_digit = source_ip_company.find_last_of(".\\");
-        return source_ip_company.substr(0, last_digit);
+        return source_ip_company.substr(0, last_digit) + ".0";
     }
 
-    void findMail()
+    void findMail(map<string, int> &memory)
     {
-        map <string, int> memory;
-
         for (auto registration : All_Registrations)
         {
             string name = registration.getDestination_Hostname();
@@ -77,9 +75,17 @@ public:
             else
                 memory.insert(pair<string, int>(name,1));
         }
+        memory.erase("-");
+        int currentMax = 0;
+        string keyMax;
         for (map<string,int>::iterator it = memory.begin(); it != memory.end(); ++it)
         {
-            cout << it->first << ": " << it->second << endl;
+            if (it->second > currentMax)
+            {
+                keyMax = it->first;
+                currentMax = it->second;
+            }
         }
+        cout << "El correo usado en la empresa es " << keyMax << " con " << currentMax << " entradas. \n";
     }
 };

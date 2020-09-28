@@ -2,7 +2,6 @@
 #include "Busqueda.h"
 #include "DataBase.h"
 #include "Sorter.h"
-#include <fstream>
 
 using namespace std; 
 
@@ -55,7 +54,6 @@ int main(){
         int found = BS.BusquedaBinaria(DB.All_Registrations, 0, DB.All_Registrations.size()-1, name,  &compare_equalto2, &compare_morethan);
         cout << (found > -1 ? " encontrado. \n" : " no ecnontrado. \n");
     }
-    
     cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-· \n";
 
     cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-· \n";   
@@ -71,8 +69,13 @@ int main(){
     cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-· \n";
 
     cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-· \n";   
-    cout << "Pregunta 6" << endl; 
-    DB.findMail();
+    cout << "Pregunta 6" << endl;
+    map <string, int> memory;
+    DB.findMail(memory);
+    // for (map<string,int>::iterator it = memory.begin(); it != memory.end(); ++it)
+    // {
+    //     cout << it->first << ": " << it->second << endl;
+    // }
     cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-· \n";
 
 }
