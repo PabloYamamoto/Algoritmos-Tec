@@ -17,7 +17,7 @@ int main()
     int num;
     bool it = true;
     do{
-        cout << "Ingrese un numero entre el 1 y 150: ";
+        cout << "Ingrese un numero entre el 1 y 150 (En el documento aparece 13): ";
         cin >> num;
         if (num > 0 && num < 151)
             it = false;
@@ -59,7 +59,7 @@ int main()
 
     cout << "EXTRA:" << endl << endl;
     int num2;
-    cout << "Ingrese el numero de ocnexiones seguidas que quiere revisar: ";
+    cout << "Ingrese el numero de conexiones seguidas que quiere revisar: ";
     cin >> num2;
     if (computadora.preguntaExtra(num2))
         cout << "Si tiene " << num2 << " conexiones seguidas a un mismo sitio web." << endl;
