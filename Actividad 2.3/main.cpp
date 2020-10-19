@@ -17,11 +17,7 @@ int main()
     int num;
     bool it = true;
     do{
-<<<<<<< HEAD
         cout << "Ingrese un numero entre el 1 y 150 (En el documento aparece 13): ";
-=======
-        cout << "Ingrese un numero entre el 1 y 150 (13 aparece en el documento): ";
->>>>>>> refs/remotes/origin/master
         cin >> num;
         if (num > 0 && num < 151)
             it = false;
