@@ -1,9 +1,9 @@
 /*
-Clase de ConexionesComputadora para definir cada ip de la computadora y sus conexiones. 
+Clase de Registration para definir todos los datos del archivo csv
 Pablo Yamamoto - A01022382 
 Santiago Kohn - A01029109
-Fecha de creación - 22/09/2020
-Fecha de última modificación - 24/09/2020
+Fecha de creación - 3/10/2020
+Fecha de última modificación - 
 */
 
 #include <iostream>

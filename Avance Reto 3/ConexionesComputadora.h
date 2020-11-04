@@ -17,8 +17,8 @@ template<class T>
 class ConexionesComputadora
 {
     string ip, nombre;
-    stack<string> conexionesEntrantes;
-    queue<string> conexionesSalientes;
+    stack<T> conexionesEntrantes;
+    queue<T> conexionesSalientes;
 
 public:
     ConexionesComputadora(){};
@@ -27,46 +27,15 @@ public:
         for (int i = 0; i < vector->All_Registrations.size(); i++)
         {
             if (vector->All_Registrations.at(i).getDestination_IP() == ip)
-                conexionesEntrantes.push(vector->All_Registrations.at(i).getSource_IP());
+                conexionesEntrantes.push(vector->All_Registrations.at(i));
             if (vector->All_Registrations.at(i).getSource_IP() == ip)
-                conexionesSalientes.push(vector->All_Registrations.at(i).getDestination_IP());
+                conexionesSalientes.push(vector->All_Registrations.at(i));
         }
     }
     ~ConexionesComputadora(){}
 
-    stack<string>* get_conexionesEntrantes(){return &conexionesEntrantes;}
-    queue<string>* get_conexionesSalientes(){return &conexionesSalientes;}
+    stack<T>* get_conexionesEntrantes(){return &conexionesEntrantes;}
+    queue<T>* get_conexionesSalientes(){return &conexionesSalientes;}
 
-    bool preguntaExtra(int n)
-    {
-        string ip;
-        int i = 1;
-        while(!conexionesSalientes.empty())
-        {
-            ip = conexionesSalientes.front();
-            conexionesSalientes.pop();
-            // Algoritmo que identifica exactamente 3 ip seguidas.
-            /*
-            if (!conexionesSalientes.empty() && ip == conexionesSalientes.front())
-            {
-                conexionesSalientes.pop();
-                if (!conexionesSalientes.empty() && ip == conexionesSalientes.front())
-                    return true;
-            }
-            */ 
-            while(i<n){
-                if (!conexionesSalientes.empty() && ip == conexionesSalientes.front())
-                    conexionesSalientes.pop();
-                else
-                {
-                    i = 1;
-                    break;
-                }
-                i++;
-            }
-            if (i == n)
-                return true;
-        }
-        return false;
-    }
+   
 };

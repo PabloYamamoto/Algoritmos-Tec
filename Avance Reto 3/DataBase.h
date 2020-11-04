@@ -1,9 +1,9 @@
 /*
-Clase de ConexionesComputadora para definir cada ip de la computadora y sus conexiones. 
+Clase de DataBase para definir leer los datos del archivo csv
 Pablo Yamamoto - A01022382 
 Santiago Kohn - A01029109
-Fecha de creación - 24/09/2020
-Fecha de última modificación - 12/10/2020
+Fecha de creación - 3/10/2020
+Fecha de última modificación - 
 */
 
 #include <vector>
@@ -27,8 +27,7 @@ public:
 
         string date, time, source_ip, source_port, source_hostname, destination_ip, destination_port, destination_hostname;
 
-        // Counter for printing the Registrations if enabeled
-        // int i = 0;
+    
         while (!MyFile.eof())
         {
             getline(MyFile, date, punctation_mark);
@@ -42,11 +41,7 @@ public:
 
             All_Registrations.push_back(Registration(date, time, source_ip, source_port, source_hostname, destination_ip, destination_port, destination_hostname));
 
-            // The code below prints all the registrations
-
-            // cout << "Resgistration number " << i << " == ";
-            // All_Registrations.at(i).print();
-            // i++;
+           
         }
         MyFile.close();
     };
