@@ -47,10 +47,6 @@ int main()
             dic.insert(pair<string, ConexionesComputadora<Registration>> (ip, Prueba)); 
         }
 
-
-        
-
-
     }
 
 
@@ -72,7 +68,16 @@ int main()
 
     cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-··-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·- \n";
     cout << "Pregunta 3" << endl; 
-    
+    cout << "Tamaño mapa: " << dic.size() << endl; 
+    int cont = 0; 
+    for (map<string,ConexionesComputadora<Registration>>::iterator it = dic.begin(); it != dic.end(); ++it)
+    {
+        if(it->second.get_conexionesEntrantes()->size() > 0)
+        {
+            cont++;
+        }
+    }
+    cout << cont << " computadoras tienen al menos 1 conexión entrante" << endl;  
     cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-··-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·- \n";
     cout << endl; 
 
@@ -94,11 +99,7 @@ int main()
     cout << "·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-··-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·- \n";
     cout << endl; 
 
-    // cout << "Tamaño mapa: " << dic.size() << endl; 
-    // for (map<string,ConexionesComputadora<Registration>>::iterator it = dic.begin(); it != dic.end(); ++it)
-    // {
-    //     cout << it->first << endl; 
-    // }
+    
 
     return 100; //Regresamos un 100 porque eso queremos sacar en esta entrega profe
 }
