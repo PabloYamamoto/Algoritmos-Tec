@@ -17,8 +17,8 @@ template<class T>
 class ConexionesComputadora
 {
     string ip, nombre;
-    stack<T> conexionesEntrantes;
-    queue<T> conexionesSalientes;
+    stack<string> conexionesEntrantes;
+    queue<string> conexionesSalientes;
 
 public:
     ConexionesComputadora(){};
@@ -27,15 +27,15 @@ public:
         for (int i = 0; i < vector->All_Registrations.size(); i++)
         {
             if (vector->All_Registrations.at(i).getDestination_IP() == ip)
-                conexionesEntrantes.push(vector->All_Registrations.at(i));
+                conexionesEntrantes.push(vector->All_Registrations.at(i).getDestination_IP());
             if (vector->All_Registrations.at(i).getSource_IP() == ip)
-                conexionesSalientes.push(vector->All_Registrations.at(i));
+                conexionesSalientes.push(vector->All_Registrations.at(i).getSource_IP());
         }
     }
     ~ConexionesComputadora(){}
 
-    stack<T>* get_conexionesEntrantes(){return &conexionesEntrantes;}
-    queue<T>* get_conexionesSalientes(){return &conexionesSalientes;}
+    stack<string>* get_conexionesEntrantes(){return &conexionesEntrantes;}
+    queue<string>* get_conexionesSalientes(){return &conexionesSalientes;}
 
    
 };
