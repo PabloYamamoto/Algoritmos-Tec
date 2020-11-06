@@ -3,7 +3,7 @@ Clase de ConexionesComputadora para definir cada ip de la computadora y sus cone
 Pablo Yamamoto - A01022382 
 Santiago Kohn - A01029109
 Fecha de creación - 12/10/2020
-Fecha de última modificación - 13/10/2020
+Fecha de última modificación - 6/10/2020
 */
 
 #include <queue>

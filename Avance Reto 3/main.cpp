@@ -3,7 +3,7 @@ Archivo main donde respoderemos las preguntas principales de este avance del ret
 Pablo Yamamoto - A01022382 
 Santiago Kohn - A01029109
 Fecha de creación - 3/10/2020
-Fecha de última modificación - 
+Fecha de última modificación - 6/10/2020
 */
 
 #include "ConexionesComputadora.h"
