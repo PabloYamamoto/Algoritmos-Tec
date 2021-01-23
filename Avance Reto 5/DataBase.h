@@ -10,7 +10,7 @@ Fecha de última modificación - 23/11/2020
 #include <map>
 #include <fstream>
 #include "Registration.h"
-
+#include "Graph.h"
 
 using namespace std;
 
@@ -55,18 +55,93 @@ public:
             i++;
         }
         size_t last_digit = source_ip_company.find_last_of(".\\");
-        return source_ip_company.substr(0, last_digit) + ".";
+        return source_ip_company.substr(0, last_digit);
     }
 
-    Graph<string> create_graph(string fecha)
+    Graph<string> create_graph_date_company(string fecha)
     {
-        Graph<string> Grafo; 
+        Graph<string> Grafo;
+        map<string, int> ip_idx;
+        bool finish = false;
+        int idx = 0;
+        string company_ip = this->company_ip();
+        for (vector<Registration>::iterator it = All_Registrations.begin(); it != All_Registrations.end(); it++)
+        {
+            if (it->getDate() == fecha)
+            {
+                string source_ip = it->getSource_IP();
+                if (source_ip != "-")
+                {
+                    if (ip_idx.find(source_ip) == ip_idx.end())
+                    {
+                        ip_idx.insert(pair<string, int>(source_ip, idx));
+                        Grafo.add_node(source_ip);
+                        idx++;
+                    }
 
+                    string destination_ip = it->getDestination_IP();
+                    size_t last_digit = destination_ip.find_last_of(".\\");
+                    if (company_ip == destination_ip.substr(0, last_digit))
+                    {
+                        if (ip_idx.find(destination_ip) == ip_idx.end())
+                        {
+                            ip_idx.insert(pair<string, int>(destination_ip, idx));
+                            Grafo.add_node(destination_ip);
+                            idx++;
+                        }
 
-        
-
-
-        return Grafo; 
+                        Grafo.add_edge(ip_idx[source_ip], ip_idx[destination_ip]);
+                    }
+                }
+                finish = true;
+            }
+            else if (finish)
+                break;
+        }
+        return Grafo;
     }
-    
+
+    Graph<string> create_graph_date_web(string fecha)
+    {
+        Graph<string> Grafo;
+        map<string, int> ip_idx;
+        bool finish = false;
+        int idx = 0;
+        string company_ip = this->company_ip();
+        for (vector<Registration>::iterator it = All_Registrations.begin(); it != All_Registrations.end(); it++)
+        {
+            if (it->getDate() == fecha)
+            {
+                string source_ip = it->getSource_IP();
+                if (source_ip != "-" )
+                {
+                    if (ip_idx.find(source_ip) == ip_idx.end())
+                    {
+                        ip_idx.insert(pair<string, int>(source_ip, idx));
+                        Grafo.add_node(source_ip);
+                        idx++;
+                    }
+
+                    string destination_ip = it->getDestination_IP();
+                    if (it->getDestination_Port() == "443")
+                    {
+                        if (ip_idx.find(destination_ip) == ip_idx.end())
+                        {
+                            ip_idx.insert(pair<string, int>(destination_ip, idx));
+                            Grafo.add_node(destination_ip);
+                            idx++;
+                        }
+
+                        Grafo.add_edge(ip_idx[source_ip], ip_idx[destination_ip]);
+                    }
+                }
+                finish = true;
+            }
+            else if (finish)
+                break;
+        }
+        return Grafo;
+    }
+
+
 };

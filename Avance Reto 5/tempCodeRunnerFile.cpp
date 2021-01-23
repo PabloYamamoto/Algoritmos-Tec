@@ -1,0 +1,1 @@
+cout << "La ip " << A << " no es la ip con mas conexiones a computadoras de la empresa en todas las fechas. \n";
